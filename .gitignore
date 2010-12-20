@@ -8,6 +8,7 @@ Makefile
 Makefile.in
 
 build/
+apps/TMSITable.txt
 
 CommonLibs/BitVectorTest
 CommonLibs/ConfigurationTest
