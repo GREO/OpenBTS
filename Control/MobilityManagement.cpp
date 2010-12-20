@@ -151,6 +151,8 @@ void Control::LocationUpdatingController(const L3LocationUpdatingRequest* lur, S
 	// Try to register the IMSI with Asterisk.
 	// This will be set true if registration succeeded in the SIP world.
 	bool success = false;
+
+  /*
 	try {
 		SIPEngine engine;
 		engine.User(mobID.digits());
@@ -168,9 +170,11 @@ void Control::LocationUpdatingController(const L3LocationUpdatingRequest* lur, S
 		SDCCH->send(L3ChannelRelease());
 		return;
 	}
+  */
 
 	// This allows us to configure Open Registration
-	bool openRegistration = gConfig.defines("Control.OpenRegistration");
+	//bool openRegistration = gConfig.defines("Control.OpenRegistration");
+  bool openRegistration = false;
 
 	// Do we need to assign a TMSI?
 	unsigned newTMSI = 0;
@@ -219,11 +223,12 @@ void Control::LocationUpdatingController(const L3LocationUpdatingRequest* lur, S
 	// We fail closed unless we're configured otherwise
 	if (!success && !openRegistration) {
 		LOG(INFO) << "registration FAILED: " << mobID;
-		SDCCH->send(L3LocationUpdatingReject(gConfig.getNum("GSM.LURejectCause")));
-		if (!preexistingTMSI) {
+		//SDCCH->send(L3LocationUpdatingReject(gConfig.getNum("GSM.LURejectCause")));
+    SDCCH->send(L3LocationUpdatingReject(0x13));
+		/*if (!preexistingTMSI) {
 			sendWelcomeMessage( "Control.FailedRegistrationWelcomeMessage",
 				"Control.FailedRegistrationWelcomeShortCode", mobID.digits(),SDCCH);
-		}
+        }*/
 		// Release the channel and return.
 		SDCCH->send(L3ChannelRelease());
 		return;
