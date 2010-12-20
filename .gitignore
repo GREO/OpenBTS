@@ -7,6 +7,8 @@ Makefile
 .deps
 Makefile.in
 
+build/
+
 CommonLibs/BitVectorTest
 CommonLibs/ConfigurationTest
 CommonLibs/F16Test
