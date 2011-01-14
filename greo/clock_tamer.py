@@ -14,7 +14,6 @@
 # nRST = io_rx_12 = 0x1000 : active low
 
 from gnuradio import usrp
-from struct import *
 from time import sleep
 import optparse, sys
 
